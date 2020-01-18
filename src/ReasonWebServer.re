@@ -111,7 +111,6 @@ let listen: (
 
 let handler: Server.handler = (_req, reply, kill_server) => {
     reply(200, "Hello ReasonML");
-    kill_server();
 };
 
 listen(~address=`Any, ~port=defaultPort, ~handler) |> Lwt_main.run;
