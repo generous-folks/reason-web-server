@@ -109,7 +109,7 @@ let listen: (
     forever;
 };
 
-let handler: Server.handler = (_req, reply, kill_server) => {
+let handler: Server.handler = (_req, reply, _kill_server) => {
     reply(200, "Hello ReasonML");
 };
 
