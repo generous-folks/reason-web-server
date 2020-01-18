@@ -1,5 +1,8 @@
 # Welcome to the ReasonWebServer project !
 This is a work in progress pedagogic project about ReasonML language.
+
+Learn more about ReasonML language on [the ReasonML website](https://reasonml.github.io/).
+
 ## Quick start
 Install dependencies using the following command
 ```sh
