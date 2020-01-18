@@ -15,9 +15,11 @@
   },
   "dependencies": {
     "@opam/dune": "*",
-    "@opam/h2": "*",
+    "@opam/lwt": "*",
+    "@opam/httpaf-lwt-unix": "*",
     "@opam/uri": "*",
     "@opam/httpaf": "*",
+    "@opam/h2": "*",
     "ocaml": "*",
     "refmt": "*",
     "@esy-ocaml/reason": "*"
