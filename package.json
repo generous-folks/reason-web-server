@@ -23,6 +23,7 @@
     "@esy-ocaml/reason": "*"
   },
   "scripts": {
+    "dev": "dune build -w src/ReasonWebServer.exe",
     "run": "dune exec src/ReasonWebServer.exe"
   }
 }
