@@ -16,6 +16,7 @@
   "dependencies": {
     "@opam/dune": "*",
     "@opam/h2": "*",
+    "@opam/uri": "*",
     "@opam/httpaf": "*",
     "ocaml": "*",
     "refmt": "*",

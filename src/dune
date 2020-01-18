@@ -1,3 +1,3 @@
 (executable
   (name ReasonWebServer)
-  (libraries h2 httpaf))
+  (libraries h2 httpaf uri))
