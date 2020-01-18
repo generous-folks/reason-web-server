@@ -23,9 +23,9 @@ esy run
 |	| Satus |
 |---|---|
 |Hello ReasonML|✅|
-|Forever server|🏗|
-|Handle multiple methods|🗓|
-|Handle multiple routes|🗓|
+|Forever server|✅|
+|Handle multiple methods|🏗|
+|Handle multiple routes|🏗|
 
 ## Contact
 Feel free to contact me to learn more about this project or ReasonML in general !
