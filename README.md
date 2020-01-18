@@ -4,6 +4,10 @@ Install dependencies using the following command
 ```sh
 esy install
 ```
+Then build it
+```sh
+esy build
+```
 You can afterward run the server
 ```sh
 esy run
