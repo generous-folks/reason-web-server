@@ -10,4 +10,4 @@ esy run
 ```
 ## Contact
 Feel free to contact me to learn more about this project or ReasonML in general !
-[mailto:clement@champouillon.com](clement@champouillon.com)
+[clement@champouillon.com](mailto:clement@champouillon.com)
