@@ -1,10 +1,27 @@
 {
   "name": "reason-web-server",
-  "description": "A very simple ReasonML http server based on Httpaf, H2, approaching the principles of \"server as a function\". Let's build a type-safe web server !",
+  "description":
+    "A very simple ReasonML http server based on Httpaf, H2, approaching the principles of \"server as a function\". Let's build a type-safe web server !",
   "version": "0.0.1",
   "main": "index.js",
   "repository": "git@github.com:generous-folks/reason-web-server.git",
   "author": "cchampou <clement@champouillon.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "esy": {
+    "build": [
+      "dune build src/ReasonWebServer.exe"
+    ]
+  },
+  "dependencies": {
+    "@opam/dune": "*",
+    "@opam/h2": "*",
+    "@opam/httpaf": "*",
+    "ocaml": "*",
+    "refmt": "*",
+    "@esy-ocaml/reason": "*"
+  },
+  "scripts": {
+    "run": "dune exec src/ReasonWebServer.exe"
+  }
 }
