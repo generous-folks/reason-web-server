@@ -17,7 +17,16 @@ You can afterward run the server
 esy run
 ```
 ## Roadmap
-[WIP]
+
+*Legend:* ✅ Done, 🏗 In progress, 🗓 Planned
+
+|	| Satus |
+|---|---|
+|Hello ReasonML|✅|
+|Forever server|🏗|
+|Handle multiple methods|🗓|
+|Handle multiple routes|🗓|
+
 ## Contact
 Feel free to contact me to learn more about this project or ReasonML in general !
 [clement@champouillon.com](mailto:clement@champouillon.com)
