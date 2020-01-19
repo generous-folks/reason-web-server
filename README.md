@@ -14,7 +14,7 @@ esy build
 ```
 You can afterward run the server
 ```sh
-esy run
+esy run [assets_directory]
 ```
 ## Roadmap
 
