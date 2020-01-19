@@ -104,7 +104,7 @@ let listen: (
         listening_address,
         connection_handler,
     ) |> ignore;
-    print_endline("Running on port" ++ host ++ ":" ++ string_of_int(port));
+    print_endline("Running on " ++ host ++ ":" ++ string_of_int(port));
 
     forever;
 };
