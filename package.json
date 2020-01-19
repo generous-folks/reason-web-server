@@ -7,11 +7,13 @@
   "repository": "git@github.com:generous-folks/reason-web-server.git",
   "author": "cchampou <clement@champouillon.com>",
   "license": "MIT",
-  "private": true,
   "esy": {
     "build": [
       "dune build src/ReasonWebServer.exe"
     ]
+  },
+  "bin": {
+    "reason-web-server": "_esy/default/build/default/src/ReasonWebServer.exe"
   },
   "dependencies": {
     "@opam/dune": "*",
