@@ -1,6 +1,6 @@
-module Status = H2.Status;
+module Status = Httpaf.Status;
 
-module Method = H2.Method;
+module Method = Httpaf.Method;
 
 
 type t = {

@@ -109,8 +109,13 @@ let listen: (
     forever;
 };
 
-let handler: Server.handler = (_req, reply, _kill_server) => {
-    reply(200, "Hello ReasonML");
+let handler: Server.handler = (req, reply, _kill_server) => {
+    switch((req.uri |> Uri.path, req.meth)) {
+    | ("/", `GET) => reply(200, "Hello ReasonML");
+    | (_, `GET) => reply(200, "Yeah, actually, I handle pretty much any GET request");
+    | (_, `POST) => reply(200, "Oh, this was a POST request !");
+    | (_, _) => reply(404, "Not found");
+    }
 };
 
 listen(~address=`Any, ~port=defaultPort, ~handler) |> Lwt_main.run;
