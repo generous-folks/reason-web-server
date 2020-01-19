@@ -24,8 +24,9 @@ esy run
 |---|---|
 |Hello ReasonML|✅|
 |Forever server|✅|
-|Handle multiple methods|🏗|
-|Handle multiple routes|🏗|
+|Handle multiple methods|✅|
+|Handle multiple routes|✅|
+|Serve some files|🏗|
 
 ## Contact
 Feel free to contact me to learn more about this project or ReasonML in general !
