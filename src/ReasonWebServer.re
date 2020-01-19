@@ -34,7 +34,7 @@ let make_request_handler: (
     let req = reqd |> Httpaf.Reqd.request;
 
     let respond = (~headers=?, status, content) => {
-        let headers =
+        let httpHeaders =
             (
               switch (headers) {
               | None => []
@@ -43,7 +43,7 @@ let make_request_handler: (
             )
             @ [("content-length", content |> String.length |> string_of_int)]
             |> Httpaf.Headers.of_list;
-        let res = Httpaf.Response.create(status |> Httpaf.Status.of_code, ~headers);
+        let res = Httpaf.Response.create(status |> Httpaf.Status.of_code, ~headers=httpHeaders);
         Httpaf.Reqd.respond_with_string(reqd, res, content);
     };
     read_body(reqd)
@@ -109,23 +109,28 @@ let listen: (
     forever;
 };
 
+let try_file = (path: string) => {
+
+    let filepath = "assets" ++ path;
+    switch(Sys.file_exists(filepath)) {
+        | true => {
+            let file = Stdlib.open_in(filepath);
+            let length = Stdlib.in_channel_length(file);
+            let content = Stdlib.really_input_string(file, length - 1);
+            Stdlib.close_in(file);
+            Some(content);
+        }
+        | false => None;
+    }
+}
+
 let handler: Server.handler = (req, reply, _kill_server) => {
 
-    print_endline("Requested");
+    let content = try_file(req.uri |> Uri.path);
 
-    let file = Stdlib.open_in("assets/sample.html");
-
-    let length = Stdlib.in_channel_length(file);
-
-    let content = Stdlib.really_input_string(file, length);
-
-    Stdlib.close_in(file);
-
-    switch((req.uri |> Uri.path, req.meth)) {
-    | ("/", `GET) => reply(200, content);
-    | (_, `GET) => reply(200, "Yeah, actually, I handle pretty much any GET request");
-    | (_, `POST) => reply(200, "Oh, this was a POST request !");
-    | (_, _) => reply(404, "Not found");
+    switch((content, req.meth)) {
+    | (Some(content), _) => reply(200, content);
+    | (None, _) => reply(404, "Not found");
     }
 };
 
