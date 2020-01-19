@@ -110,8 +110,19 @@ let listen: (
 };
 
 let handler: Server.handler = (req, reply, _kill_server) => {
+
+    print_endline("Requested");
+
+    let file = Stdlib.open_in("assets/sample.html");
+
+    let length = Stdlib.in_channel_length(file);
+
+    let content = Stdlib.really_input_string(file, length);
+
+    Stdlib.close_in(file);
+
     switch((req.uri |> Uri.path, req.meth)) {
-    | ("/", `GET) => reply(200, "Hello ReasonML");
+    | ("/", `GET) => reply(200, content);
     | (_, `GET) => reply(200, "Yeah, actually, I handle pretty much any GET request");
     | (_, `POST) => reply(200, "Oh, this was a POST request !");
     | (_, _) => reply(404, "Not found");
