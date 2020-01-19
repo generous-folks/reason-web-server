@@ -13,7 +13,7 @@
     ]
   },
   "bin": {
-    "reason-web-server": "_esy/default/build/default/src/ReasonWebServer.exe"
+    "reason-web-server": "bin/ReasonWebServer"
   },
   "dependencies": {
     "@opam/dune": "*",

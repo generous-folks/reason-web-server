@@ -1,6 +1,10 @@
 node_modules/
-_esy/
+_esy/**/*
+.idea/
 esy.lock/
-_build/
+_build/*
 *.iml
+src/
+assets/
 */**/.merlin
+dune-project
