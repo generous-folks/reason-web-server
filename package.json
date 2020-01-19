@@ -1,5 +1,5 @@
 {
-  "name": "reason-web-server",
+  "name": "@generous-folks/reason-web-server",
   "description":
     "A very simple ReasonML http server based on Httpaf, approaching the principles of \"server as a function\". Let's build a type-safe web server !",
   "version": "0.0.1",
