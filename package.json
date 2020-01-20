@@ -21,6 +21,7 @@
     "@opam/httpaf-lwt-unix": "*",
     "@opam/uri": "*",
     "@opam/httpaf": "*",
+    "@opam/magic-mime": "*",
     "ocaml": "*",
     "refmt": "*",
     "@esy-ocaml/reason": "*"

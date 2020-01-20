@@ -131,9 +131,10 @@ let try_file = (path: string) => {
 let handler: Server.handler = (req, reply, _kill_server) => {
 
     let content = try_file(req.uri |> Uri.path);
+    let content_type = Magic_mime.lookup(req.uri |> Uri.path);
 
     switch((content, req.meth)) {
-    | (Some(content), _) => reply(200, content);
+    | (Some(content), _) => reply(200, content, ~headers=[("content-type", content_type)]);
     | (None, _) => reply(404, "Not found");
     }
 };
