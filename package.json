@@ -22,7 +22,7 @@
     "@opam/uri": "*",
     "@opam/httpaf": "*",
     "@opam/magic-mime": "*",
-    "ocaml": "*",
+    "ocaml": "4.8.0",
     "refmt": "*",
     "@esy-ocaml/reason": "*"
   },
