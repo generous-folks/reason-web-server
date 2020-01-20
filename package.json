@@ -2,7 +2,7 @@
   "name": "@generous-folks/reason-web-server",
   "description":
     "A very simple ReasonML http server based on Httpaf, approaching the principles of \"server as a function\". Let's build a type-safe web server !",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "repository": "git@github.com:generous-folks/reason-web-server.git",
   "author": "cchampou <clement@champouillon.com>",
