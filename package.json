@@ -7,6 +7,9 @@
   "repository": "git@github.com:generous-folks/reason-web-server.git",
   "author": "cchampou <clement@champouillon.com>",
   "license": "MIT",
+//  "publishConfig": {
+//    "registry":"https://npm.pkg.github.com/"
+//  },
   "esy": {
     "build": [
       "dune build src/ReasonWebServer.exe"
