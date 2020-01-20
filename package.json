@@ -18,7 +18,7 @@
   "bin": {
     "reason-web-server": "bin/ReasonWebServer"
   },
-  "dependencies": {
+  "devDependencies": {
     "@opam/dune": "*",
     "@opam/lwt": "*",
     "@opam/httpaf-lwt-unix": "*",
