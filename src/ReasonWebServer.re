@@ -42,6 +42,7 @@ let make_request_handler: (
               }
             )
             @ [("content-length", content |> String.length |> string_of_int)]
+            @ [("x-powered-by", "reason-web-server")]
             |> Httpaf.Headers.of_list;
         let res = Httpaf.Response.create(status |> Httpaf.Status.of_code, ~headers=httpHeaders);
         Httpaf.Reqd.respond_with_string(reqd, res, content);
