@@ -4,3 +4,4 @@ esy.lock/
 _build/
 *.iml
 */**/.merlin
+bin/ReasonWebServer
