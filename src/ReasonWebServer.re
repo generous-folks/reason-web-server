@@ -98,8 +98,8 @@ let listen: (
 
 let handler: Server.handler = (req, reply, _kill_server) => {
 
-    let content = Files.try_file(req.uri |> Uri.path);
-    let content_type = Files.determine_file_type(req.uri |> Uri.path);
+    let path = req.uri |> Uri.path;
+    let (content, content_type) = Files.try_file(Files.get_base_path, path);
 
     switch((content, req.meth)) {
     | (Some(content), _) => reply(200, content, ~headers=[("content-type", content_type)]);
