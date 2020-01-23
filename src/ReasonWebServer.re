@@ -9,15 +9,15 @@ let read_body = reqd => {
   let (next, awake) = Lwt.wait();
 
   Lwt.async(() => {
-    let body = reqd |> Httpaf.Reqd.request_body;
+    let body = reqd |> H2.Reqd.request_body;
     let body_str = ref("");
     let on_eof = () => Lwt.wakeup_later(awake, Some(body_str^));
     let rec on_read = (request_data, ~off, ~len) => {
       let read = Bigstringaf.substring(~off, ~len, request_data);
       body_str := body_str^ ++ read;
-      Httpaf.Body.schedule_read(body, ~on_read, ~on_eof);
+      H2.Body.schedule_read(body, ~on_read, ~on_eof);
     };
-    Httpaf.Body.schedule_read(body, ~on_read, ~on_eof);
+    H2.Body.schedule_read(body, ~on_read, ~on_eof);
     Lwt.return_unit;
   });
 
@@ -29,9 +29,9 @@ let make_request_handler: (
     ~handler: Server.handler,
     ~closer: unit => unit,
     Unix.sockaddr
-) => Httpaf.Server_connection.request_handler= (~uri, ~handler, ~closer, _client, reqd) => {
+) => H2.Server_connection.request_handler= (~uri, ~handler, ~closer, _client, reqd) => {
 
-    let req = reqd |> Httpaf.Reqd.request;
+    let req = reqd |> H2.Reqd.request;
 
     let respond = (~headers=?, status, content) => {
         let httpHeaders =
@@ -43,9 +43,9 @@ let make_request_handler: (
             )
             @ [("content-length", content |> String.length |> string_of_int)]
             @ [("x-powered-by", "reason-web-server")]
-            |> Httpaf.Headers.of_list;
-        let res = Httpaf.Response.create(status |> Httpaf.Status.of_code, ~headers=httpHeaders);
-        Httpaf.Reqd.respond_with_string(reqd, res, content);
+            |> H2.Headers.of_list;
+        let res = H2.Response.create(status |> H2.Status.of_code, ~headers=httpHeaders);
+        H2.Reqd.respond_with_string(reqd, res, content);
     };
     read_body(reqd)
     >|= (
@@ -92,8 +92,8 @@ let listen: (
 
 
     let connection_handler =
-      Httpaf_lwt_unix.Server.create_connection_handler(
-        ~config=Httpaf.Config.default,
+      H2_lwt_unix.Server.create_connection_handler(
+        ~config=H2.Config.default,
         ~request_handler=make_request_handler(~uri, ~handler, ~closer),
         ~error_handler,
       );

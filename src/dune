@@ -1,3 +1,3 @@
 (executable
   (name ReasonWebServer)
-  (libraries httpaf uri lwt httpaf-lwt-unix magic-mime))
+  (libraries h2 uri lwt h2-lwt-unix magic-mime))

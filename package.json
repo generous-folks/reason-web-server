@@ -18,9 +18,7 @@
   "devDependencies": {
     "@opam/dune": "*",
     "@opam/lwt": "*",
-    "@opam/httpaf-lwt-unix": "*",
     "@opam/uri": "*",
-    "@opam/httpaf": "*",
     "@opam/magic-mime": "*",
     "ocaml": "4.8.0",
     "refmt": "*",
@@ -28,7 +26,8 @@
   },
   "scripts": {
     "dev": "dune build -w src/ReasonWebServer.exe",
-    "post:build": "cp _esy/default/build/default/src/ReasonWebServer.exe bin/ReasonWebServer",
+    "post:build":
+      "cp _esy/default/build/default/src/ReasonWebServer.exe bin/ReasonWebServer",
     "run": "dune exec src/ReasonWebServer.exe"
   }
 }

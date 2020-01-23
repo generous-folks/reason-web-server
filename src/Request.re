@@ -1,6 +1,6 @@
-module Status = Httpaf.Status;
+module Status = H2.Status;
 
-module Method = Httpaf.Method;
+module Method = H2.Method;
 
 
 type t = {
@@ -15,7 +15,7 @@ let body = t => t.body;
 let meth = t => t.meth;
 
 let transform = (~body, ~uri, req) => {
-    let headers = req.Httpaf.Request.headers |> Httpaf.Headers.to_list;
+    let headers = req.H2.Request.headers |> H2.Headers.to_list;
     let meth = req.meth;
     { meth, uri, body, headers };
 };
