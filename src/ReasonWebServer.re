@@ -4,34 +4,14 @@ open Lwt.Infix;
 let defaultAddress = "0.0.0.0";
 let defaultPort = 80;
 
-
-let read_body = reqd => {
-  let (next, awake) = Lwt.wait();
-
-  Lwt.async(() => {
-    let body = reqd |> H2.Reqd.request_body;
-    let body_str = ref("");
-    let on_eof = () => Lwt.wakeup_later(awake, Some(body_str^));
-    let rec on_read = (request_data, ~off, ~len) => {
-      let read = Bigstringaf.substring(~off, ~len, request_data);
-      body_str := body_str^ ++ read;
-      H2.Body.schedule_read(body, ~on_read, ~on_eof);
-    };
-    H2.Body.schedule_read(body, ~on_read, ~on_eof);
-    Lwt.return_unit;
-  });
-
-  next;
-};
-
 let make_request_handler: (
     ~uri: Uri.t,
     ~handler: Server.handler,
     ~closer: unit => unit,
     Unix.sockaddr
-) => H2.Server_connection.request_handler= (~uri, ~handler, ~closer, _client, reqd) => {
+) => Httpaf.Server_connection.request_handler= (~uri, ~handler, ~closer, _client, reqd) => {
 
-    let req = reqd |> H2.Reqd.request;
+    let req = reqd |> Httpaf.Reqd.request;
 
     let respond = (~headers=?, status, content) => {
         let httpHeaders =
@@ -43,11 +23,11 @@ let make_request_handler: (
             )
             @ [("content-length", content |> String.length |> string_of_int)]
             @ [("x-powered-by", "reason-web-server")]
-            |> H2.Headers.of_list;
-        let res = H2.Response.create(status |> H2.Status.of_code, ~headers=httpHeaders);
-        H2.Reqd.respond_with_string(reqd, res, content);
+            |> Httpaf.Headers.of_list;
+        let res = Httpaf.Response.create(status |> Httpaf.Status.of_code, ~headers=httpHeaders);
+        Httpaf.Reqd.respond_with_string(reqd, res, content);
     };
-    read_body(reqd)
+    Server.read_body(reqd)
     >|= (
        body => {
          let uri = Uri.with_path(uri, req.target);
@@ -58,8 +38,13 @@ let make_request_handler: (
      )|> ignore;
 };
 
-let error_handler = (_client, ~request as _=?, _err, _get) => {
-
+let error_handler = (_client, ~request as _=?, err, _get) => {
+  print_endline(switch(err) {
+    | `Bad_request => "Bad_request"
+    | `Bad_gateway => "Bad_gateway"
+    | `Internal_server_error => "Internal_server_error"
+    | `Exn(exn) => Printexc.to_string(exn)
+  });
   ();
 };
 
@@ -90,10 +75,9 @@ let listen: (
 
     let closer = () => Lwt.wakeup_later(awaker, ());
 
-
     let connection_handler =
-      H2_lwt_unix.Server.create_connection_handler(
-        ~config=H2.Config.default,
+      Httpaf_lwt_unix.Server.create_connection_handler(
+        ~config=Httpaf.Config.default,
         ~request_handler=make_request_handler(~uri, ~handler, ~closer),
         ~error_handler,
       );
