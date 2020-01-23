@@ -12,6 +12,8 @@
   "devDependencies": {
     "@opam/dune": "*",
     "@opam/lwt": "*",
+    "@opam/h2-lwt-unix": "*",
+    "@opam/h2": "*",
     "@opam/uri": "*",
     "@opam/magic-mime": "*",
     "ocaml": "4.8.0",
