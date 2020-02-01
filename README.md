@@ -2,8 +2,20 @@
 This is a work in progress pedagogic project about ReasonML language.
 
 Learn more about ReasonML language on [the ReasonML website](https://reasonml.github.io/).
-
-## Quick start
+## Using as static server
+Get the package from NPM using `npm` or `yarn`
+```
+yarn add @generous-folks/reason-web-server
+```
+or
+```
+npm install @generous-folks/reason-web-server
+```
+Use the binary to serve any static folder
+```shell script
+reason-web-server [directory]
+```
+## Development quick start
 Install dependencies using the following command
 ```sh
 esy install
