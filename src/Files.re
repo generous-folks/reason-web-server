@@ -5,7 +5,10 @@ let is_index = path => Str.string_match(Str.regexp(".*index.html$"), path, 0);
 
 let get_base_path = switch(Array.length(Sys.argv)) {
     | 2 => Sys.argv[1];
-    | _ => "";
+    | _ => {
+      print_endline("Missing first argument 'directory', defaulting to 'assets'");
+      "assets";
+    };
 }
 
 let determine_file_type = path => Magic_mime.lookup(path);
