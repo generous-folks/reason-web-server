@@ -2,7 +2,7 @@
 open Lwt.Infix;
 
 let defaultAddress = "0.0.0.0";
-let defaultPort = 80;
+let defaultPort = 5000;
 
 let make_request_handler: (
     ~uri: Uri.t,
